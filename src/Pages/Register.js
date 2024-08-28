@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "../Style/Style.css";
+import axios from "axios";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -18,41 +19,35 @@ const Register = () => {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      const response = await fetch(
-        "https://cake-shop-backend-rosy.vercel.app/api/users/register",
+      const response = await axios.post(
+        process.env.REACT_APP_REGISTER_API,
+        values,
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("Success:", data);
-        toast.success("Registered successfully.");
+      console.log("Full Response:", response);
+      if (response.status === 201) {
+        console.log("Registration Successful:", response.data);
+        toast.success(response.data.msg);
         setTimeout(() => {
-          navigate("/");
+          navigate("/login");
         }, 800);
         resetForm();
       } else {
-        console.log("Error:", data);
-
-        if (data.error) {
-          if (data.error.includes("already exists")) {
-            toast.error("User already exists.");
-          } else {
-            toast.error(data.error || "An error occurred. Please try again.");
-          }
-        } else {
-          toast.error("There is something wrong");
-        }
-
+        toast.error(
+          response.data.msg || "An error occurred. Please try again."
+        );
         resetForm();
       }
     } catch (error) {
       console.error("An unexpected error occurred:", error);
-      toast.error("An unexpected error occurred. Please try again later.");
+      toast.error(
+        error.response?.data?.msg ||
+          "An unexpected error occurred. Please try again later."
+      );
       resetForm();
     }
   };
@@ -126,7 +121,7 @@ const Register = () => {
                   <div className="mt-7 text-center text-sm font-normal">
                     Already have an account?
                     <span className="font-bold ml-2">
-                      <NavLink to="/">Login</NavLink>
+                      <NavLink to="/login">Login</NavLink>
                     </span>
                   </div>
                 </div>

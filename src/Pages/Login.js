@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import google from "../Images/google.png";
 import facebook from "../Images/facebook.png";
 import "../Style/Style.css";
+import axios from "axios";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -16,40 +17,36 @@ const validationSchema = Yup.object({
 
 const Login = () => {
   const navigate = useNavigate();
-
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      const response = await fetch(
-        "https://cake-shop-backend-rosy.vercel.app/api/users/login",
+      const response = await axios.post(
+        process.env.REACT_APP_LOGIN_API,
+        values,
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("Success:", data);
-        toast.success("Logged in successfully.");
+      if (response.data.token) {
+        console.log("Login Successful:", response.data.msg);
+        toast.success(response.data.msg);
+        localStorage.setItem("authToken", response.data.token);
         setTimeout(() => {
           navigate("/home");
         }, 800);
         resetForm();
       } else {
-        console.log("Error:", data);
-
-        if (data.error === "Login failed") {
-          toast.error("Invalid email or password.");
-        } else {
-          toast.error(data.error || "An error occurred. Please try again.");
-        }
-
+        console.log("Login Failed:", response.data.msg);
+        toast.error(response.data.msg);
         resetForm();
       }
     } catch (error) {
       console.error("An unexpected error occurred:", error);
-      toast.error("An unexpected error occurred. Please try again later.");
+      toast.error(
+        error.response?.data?.msg ||
+          "An unexpected error occurred. Please try again later."
+      );
       resetForm();
     }
   };
