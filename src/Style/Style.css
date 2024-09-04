@@ -7,6 +7,8 @@
   font-family: "Poppins", sans-serif !important;
 }
 
+/* login and register page css */
+
 .login_page .login_button {
   background-image: linear-gradient(to right, #9181f4, #5038ed);
   box-shadow: 0px 8px 21px 0px #00000029;
@@ -24,7 +26,7 @@
 .login_page .login_other_font:after {
   content: "";
   flex: 1 1;
-  border-bottom: 2px solid #F0EDFF;
+  border-bottom: 2px solid #f0edff;
   margin: auto;
 }
 .login_page .login_other_font:before {
@@ -34,14 +36,62 @@
   margin-left: 10px;
 }
 
-.login_page .image_box{
-    background-image: url('../Images/login.png');
-    background-position: center;
-    background-size: cover;
+.login_page .image_box {
+  background-image: url("../Images/login.png");
+  background-position: center;
+  background-size: cover;
 }
 
+/* Home page css */
 
+/* Slide 1 css */
 
+.home_page .slide_1 .slick-slider .slick-dots {
+  bottom: 12px;
+}
 
+.home_page .slide_1 .slick-slider .slick-dots li {
+  margin: 0 2px;
+}
 
+.home_page .slide_1 .slick-slider .slick-dots li button:before {
+  font-size: 8px;
+  color: #ffffff;
+  opacity: 1;
+}
+
+.home_page .slide_1 .slick-slider .slick-dots li.slick-active button:before {
+  color: #ff4a22;
+  opacity: 1;
+}
+.home_page .slide_1 .slick-slider .slick-dots li button:before {
+  transition: color 0.3s ease;
+}
+
+/* Slide 2 css */
+
+.home_page .slide_2 img {
+  height: 540px !important;
+  width: 100% !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .home_page .slide_2 img {
+    height: 450px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home_page .slide_2 img {
+    height: 420px !important;
+  }
+}
+
+/* comment css */
+
+.home_page .comments .comment_number img{
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
 

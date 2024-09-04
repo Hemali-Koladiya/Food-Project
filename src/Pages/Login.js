@@ -29,16 +29,16 @@ const Login = () => {
         }
       );
       if (response.data.token) {
-        console.log("Login Successful:", response.data.msg);
-        toast.success(response.data.msg);
+        console.log("Login Successfully",response.data);
+        toast.success("Login Successfully" || response.data.msg);
         localStorage.setItem("authToken", response.data.token);
         setTimeout(() => {
-          navigate("/home");
+          navigate("/");
         }, 800);
         resetForm();
       } else {
-        console.log("Login Failed:", response.data.msg);
-        toast.error(response.data.msg);
+        console.log("Login Failed:" || response.data.msg);
+        toast.error("Login Failed:" ||response.data.msg);
         resetForm();
       }
     } catch (error) {
@@ -110,18 +110,18 @@ const Login = () => {
                     </p>
                   </div>
                   <div className="flex justify-center flex-col gap-y-4 mt-6">
-                    <button className="flex items-center justify-center border-2 border-slate-200 rounded-2xl py-2">
+                    <NavLink className="flex items-center justify-center border-2 border-slate-200 rounded-2xl py-2">
                       <img src={google} alt="google logo" />
                       <span className="ml-3 text-xs font-normal">
                         Login with <span className="font-bold">Google</span>
                       </span>
-                    </button>
-                    <button className="flex items-center justify-center border-2 border-slate-200 rounded-2xl py-2">
+                    </NavLink>
+                    <NavLink className="flex items-center justify-center border-2 border-slate-200 rounded-2xl py-2">
                       <img src={facebook} alt="facebook logo" />
                       <span className="ml-3 text-xs font-normal">
                         Login with <span className="font-bold">Facebook</span>
                       </span>
-                    </button>
+                    </NavLink>
                   </div>
                   <div className="mt-7 text-center text-sm font-normal">
                     Don't have an account ?
