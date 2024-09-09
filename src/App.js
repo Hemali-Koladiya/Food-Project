@@ -7,6 +7,8 @@ import Protected from "./Protected";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
 import Product from "./Pages/Product";
+import Productdetails from "./Pages/Productdetails";
+import Cart from "./Pages/Cart";
 
 function App() {
   return (
@@ -26,6 +28,22 @@ function App() {
             element={
               <>
                 <Protected Cmp={Product} />
+              </>
+            }
+          />
+          <Route
+            path="/productdetails"
+            element={
+              <>
+                <Protected Cmp={Productdetails} />
+              </>
+            }
+          />
+           <Route
+            path="/cart"
+            element={
+              <>
+                <Protected Cmp={Cart} />
               </>
             }
           />

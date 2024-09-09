@@ -17,7 +17,6 @@ import Subscribe from "../Component/Subscribe";
 import slider21 from "../Images/slide21.jpg";
 import slider22 from "../Images/slide22.jpg";
 import slider23 from "../Images/slide24.jpg";
-import { NextArrow, PrevArrow } from "../Component/Arrows";
 import image1 from "../Images/image1.jpg";
 import image2 from "../Images/image2.jpg";
 import image3 from "../Images/image3.jpg";
@@ -30,94 +29,16 @@ import comment3 from "../Images/comment3.png";
 import comment4 from "../Images/comment4.png";
 import input from "../Images/input.png";
 import { NavLink } from "react-router-dom";
+import Slidersettings from "./Slidersettings";
 
 const Home = () => {
-  const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "170px",
-    slidesToShow: 1,
-    speed: 500,
-    dots: true,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 1500,
-    cssEase: "linear",
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-          centerMode: true,
-          centerPadding: "120px",
-        },
-      },
-      {
-        breakpoint: 1023,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-          centerMode: true,
-          centerPadding: "150px",
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-          centerPadding: "120px",
-          centerMode: true,
-        },
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerMode: true,
-          centerPadding: "30px",
-        },
-      },
-    ],
-  };
+  
+  const {settings , secondslide} = Slidersettings();
+  const firstsliderimages = [slide1, slide2, slide3];
+  const secondsliderimages = [slider21, slider22, slider23];
+  const cookiesimages = [image1, image2, image3, image4];
+  const commentsimages = [comment1, comment2, comment3, comment4];
 
-  const secondslide = {
-    className: "normal",
-    dots: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    adaptiveHeight: false,
-    responsive: [
-      {
-        breakpoint: 1023,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          speed: 500,
-        },
-      },
-      {
-        breakpoint: 767,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          speed: 500,
-        },
-      },
-    ],
-  };
   return (
     <>
       <Header />
@@ -154,27 +75,11 @@ const Home = () => {
                     style={{ marginBottom: "-7px" }}
                   >
                     <Slider {...settings}>
-                      <div className="px-2">
-                        <img
-                          src={slide1}
-                          alt="silde 1"
-                          className="rounded-xl"
-                        />
-                      </div>
-                      <div className="px-2">
-                        <img
-                          src={slide2}
-                          alt="silde 1"
-                          className="rounded-xl "
-                        />
-                      </div>
-                      <div className="px-2">
-                        <img
-                          src={slide3}
-                          alt="silde 1"
-                          className="rounded-xl"
-                        />
-                      </div>
+                      {firstsliderimages.map((img, index) => (
+                        <div className="px-2" key={index}>
+                          <img src={img} alt="silde 1" className="rounded-xl" />
+                        </div>
+                      ))}
                     </Slider>
                   </div>
                 </div>
@@ -188,7 +93,10 @@ const Home = () => {
               <h3 className="lg:text-3xl text-2xl font-semibold">
                 Popular Menu
               </h3>
-              <NavLink to="/product" className="lg:text-base text-sm font-normal text-orange-600 flex items-center gap-2">
+              <NavLink
+                to="/product"
+                className="lg:text-base text-sm font-normal text-orange-600 flex items-center gap-2"
+              >
                 view all <span className="lg:text-xl text-lg">&#x3e;</span>
               </NavLink>
             </div>
@@ -236,39 +144,23 @@ const Home = () => {
                 style={{ margin: 0, padding: 0 }}
               >
                 <Slider {...secondslide}>
-                  <div className="md:px-2 lg:px-0 h-full">
-                    <img src={slider21} alt="slide 1" className="rounded-2xl" />
-                  </div>
-                  <div className="md:px-2 lg:px-0">
-                    <img src={slider22} alt="slide 2" className="rounded-2xl" />
-                  </div>
-                  <div className="md:px-2 lg:px-0">
-                    <img src={slider23} alt="slide 2" className="rounded-2xl" />
-                  </div>
+                  {secondsliderimages.map((img, index) => (
+                    <div className="md:px-2 lg:px-0" key={index}>
+                      <img src={img} alt="slide 1" className="rounded-2xl" />
+                    </div>
+                  ))}
                 </Slider>
               </div>
               <div className="lg:w-2/3  md:flex xl:py-5 xl:gap-8 gap-6">
                 <div className="xl:w-36 md:w-32 w-full flex md:flex-col md:gap-5 flex-wrap  justify-center gap-6">
-                  <img
-                    src={image1}
-                    alt="image-1"
-                    className="xl:h-28 h-24 md:w-full w-5/12 rounded-2xl object-cover"
-                  />
-                  <img
-                    src={image2}
-                    alt="image-1"
-                    className="xl:h-28 h-24 md:w-full w-5/12 rounded-2xl object-cover"
-                  />
-                  <img
-                    src={image3}
-                    alt="image-1"
-                    className="xl:h-28 h-24 md:w-full w-5/12 rounded-2xl object-cover"
-                  />
-                  <img
-                    src={image4}
-                    alt="image-1"
-                    className="xl:h-28 h-24 md:w-full w-5/12 rounded-2xl object-cover"
-                  />
+                  {cookiesimages.map((img, index) => (
+                    <img
+                      key={index}
+                      src={img}
+                      alt="image-1"
+                      className="xl:h-28 h-24 md:w-full w-5/12 rounded-2xl object-cover"
+                    />
+                  ))}
                 </div>
                 <div className=" lg:w-full md:w-9/12 xl:w-8/12 mt-8 md:mt-0">
                   <h3
@@ -277,27 +169,46 @@ const Home = () => {
                   >
                     Home Made Chocolate Donut
                   </h3>
-                  <p className="xl:text-base text-sm font-normal xl:mb-6 mb-4" style={{color: "#333333CC"}}>
+                  <p
+                    className="xl:text-base text-sm font-normal xl:mb-6 mb-4"
+                    style={{ color: "#333333CC" }}
+                  >
                     Id cursus metus aliquam eleifend mi in nulla posuere. Lorem
                     faucibus vitae aliquet nec ullamcorper sit.
                   </p>
                   <div className="time_details flex md:gap-8 xl:mb-6 mb-4 gap-6">
                     <p className="flex items-center gap-2">
-                      <RiCalendarEventFill color={"#333333CC"} size={16}/>
-                      <span className="xl:text-base md:text-sm text-xs font-medium" style={{color: "#333333CC"}}>August, 25, 2003</span>
+                      <RiCalendarEventFill color={"#333333CC"} size={16} />
+                      <span
+                        className="xl:text-base md:text-sm text-xs font-medium"
+                        style={{ color: "#333333CC" }}
+                      >
+                        August, 25, 2003
+                      </span>
                     </p>
                     <p className="flex items-center gap-2">
-                      <LuAlarmClock color={"#333333CC"} size={16}/>
-                      <span className="xl:text-base md:text-sm text-xs font-medium" style={{color: "#333333CC"}}>15 minutes cook</span>
+                      <LuAlarmClock color={"#333333CC"} size={16} />
+                      <span
+                        className="xl:text-base md:text-sm text-xs font-medium"
+                        style={{ color: "#333333CC" }}
+                      >
+                        15 minutes cook
+                      </span>
                     </p>
                   </div>
-                  <div className="recipe xl:text-base text-sm font-normal mb-8" style={{color: "#333333CC"}}>
+                  <div
+                    className="recipe xl:text-base text-sm font-normal mb-8"
+                    style={{ color: "#333333CC" }}
+                  >
                     <p className="mb-3">
                       Adipiscing at in tellus integer. Pellentesque massa
                       placerat duis ultricies lacus. Nisi porta lorem mollis
                       aliquam ut porttitor leo.
                     </p>
-                    <ol className="ps-4 flex flex-col gap-2" style={{ listStyleType: "decimal" }}>
+                    <ol
+                      className="ps-4 flex flex-col gap-2"
+                      style={{ listStyleType: "decimal" }}
+                    >
                       <li>Venenatis cras sed felis eget.</li>
                       <li>Duis ultricies lacus sed turpis tincidunt.</li>
                       <li>Interdum varius sit amet mattis.</li>
@@ -310,25 +221,22 @@ const Home = () => {
                   </div>
                   <div className="comments flex md:flex-row flex-col md:items-center md:justify-between gap-7 md:gap-0">
                     <div className="comment_number flex  items-center gap-3">
-                      <div className="flex">
-                        <img src={comment1} alt="comment 1" />
-                        <img
-                          src={comment2}
-                          alt="comment 2"
-                          style={{ marginLeft: "-14px" }}
-                        />
-                        <img
-                          src={comment3}
-                          alt="comment 3"
-                          style={{ marginLeft: "-14px" }}
-                        />
-                        <img
-                          src={comment4}
-                          alt="comment 4"
-                          style={{ marginLeft: "-14px" }}
-                        />
+                      <div className="flex ps-3">
+                        {commentsimages.map((img, index) => (
+                          <img
+                            key={index}
+                            src={img}
+                            alt="comment 1"
+                            style={{ marginLeft: "-14px" }}
+                          />
+                        ))}
                       </div>
-                      <p className="font-normal xl:text-sm text-xs" style={{color: "#333333"}}>1.2K+ comment</p>
+                      <p
+                        className="font-normal xl:text-sm text-xs"
+                        style={{ color: "#333333" }}
+                      >
+                        1.2K+ comment
+                      </p>
                     </div>
                     <div className="border border-orange-600 flex py-2 px-4 gap-3 rounded-full items-center md:w-6/12 justify-between">
                       <input
@@ -336,7 +244,7 @@ const Home = () => {
                         placeholder="Type Comment"
                         className="outline-none xl:text-sm text-xs w-full caret-orange-600"
                       />
-                      <img src={input} alt="input" className="h-4 w-4"/>
+                      <img src={input} alt="input" className="h-4 w-4" />
                     </div>
                   </div>
                 </div>
