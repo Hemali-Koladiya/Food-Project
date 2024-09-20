@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "../Style/Style.css";
-import axios from "axios";
+import { postRegister } from "../Helper/Api";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -19,16 +19,9 @@ const Register = () => {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      const response = await axios.post(
-        process.env.REACT_APP_REGISTER_API,
-        values,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await postRegister(values)
       console.log("Full Response:", response);
+
       if (response.status === 201) {
         console.log("Registration Successful:", response.data);
         toast.success(response.data.msg);

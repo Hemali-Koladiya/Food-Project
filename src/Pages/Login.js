@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import google from "../Images/google.png";
 import facebook from "../Images/facebook.png";
 import "../Style/Style.css";
-import axios from "axios";
+import { postLogin } from "../Helper/Api";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -19,15 +19,8 @@ const Login = () => {
   const navigate = useNavigate();
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      const response = await axios.post(
-        process.env.REACT_APP_LOGIN_API,
-        values,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await postLogin(values);
+      
       if (response.data.token) {
         console.log("Login Successfully",response.data);
         toast.success("Login Successfully" || response.data.msg);

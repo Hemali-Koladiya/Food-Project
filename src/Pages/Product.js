@@ -56,7 +56,7 @@ const Product = () => {
                <Card
                 img={product1}
                 name={"Tiramisu Cake With Strawberry Sauce"}
-                price={"12.00"}
+                price={"12.00"} 
                 order={"1035"}
               />
               <Card
@@ -80,7 +80,7 @@ const Product = () => {
               <Card
                 img={product2}
                 name={"Premium Cupcakes"}
-                price={"12.00"}
+                price={"12.00"} 
                 order={"1035"}
               />
               <Card
